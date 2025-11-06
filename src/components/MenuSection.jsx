@@ -1,61 +1,42 @@
-import { Plus } from "lucide-react";
+import React from 'react';
+import { Plus, Star } from 'lucide-react';
 
-const categories = [
-  {
-    id: "pizzas",
-    title: "Pizzas",
-    items: [
-      { id: "margherita", name: "Margherita", desc: "Classic cheese & basil", price: 7.99, img: "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2a?q=80&w=1000&auto=format&fit=crop" },
-      { id: "pepperoni", name: "Pepperoni", desc: "Smoky pepperoni & mozzarella", price: 8.99, img: "https://images.unsplash.com/photo-1541745537413-b804ba1da9b3?q=80&w=1000&auto=format&fit=crop" },
-      { id: "veggie", name: "Veggie Supreme", desc: "Peppers, olives, corn", price: 8.49, img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000&auto=format&fit=crop" },
-    ],
-  },
-  {
-    id: "burgers",
-    title: "Burgers",
-    items: [
-      { id: "classic-burger", name: "Classic Burger", desc: "Grilled patty, cheddar, sauce", price: 6.49, img: "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000&auto=format&fit=crop" },
-      { id: "chicken-burger", name: "Crispy Chicken Burger", desc: "Buttermilk fried chicken", price: 6.99, img: "https://images.unsplash.com/photo-1550547660-8a8c5f094527?q=80&w=1000&auto=format&fit=crop" },
-    ],
-  },
-  {
-    id: "noodles",
-    title: "Chowmein",
-    items: [
-      { id: "veg-chow", name: "Veg Chowmein", desc: "Stir-fried noodles & veggies", price: 5.99, img: "https://images.unsplash.com/photo-1604908176997-431232b95b2b?q=80&w=1000&auto=format&fit=crop" },
-      { id: "schezwan-chow", name: "Schezwan Chowmein", desc: "Spicy, bold flavors", price: 6.49, img: "https://images.unsplash.com/photo-1584420368407-5581676f0472?q=80&w=1000&auto=format&fit=crop" },
-    ],
-  },
+const sampleMenu = [
+  { id: 'pz1', name: 'Margherita Pizza', price: 199, rating: 4.5, img: 'https://images.unsplash.com/photo-1541745537413-b8046dc6d66c?q=80&w=1200&auto=format&fit=crop' },
+  { id: 'bg1', name: 'Classic Burger', price: 149, rating: 4.3, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop' },
+  { id: 'ch1', name: 'Veg Chowmein', price: 129, rating: 4.2, img: 'https://images.unsplash.com/photo-1625944525541-10b28c0c8988?q=80&w=1200&auto=format&fit=crop' },
+  { id: 'pz2', name: 'Farmhouse Pizza', price: 299, rating: 4.6, img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=1200&auto=format&fit=crop' },
+  { id: 'bg2', name: 'Chicken Burger', price: 179, rating: 4.4, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop' },
+  { id: 'ch2', name: 'Hakka Noodles', price: 159, rating: 4.1, img: 'https://images.unsplash.com/photo-1604908554007-32c673ca248b?q=80&w=1200&auto=format&fit=crop' },
 ];
 
 export default function MenuSection({ onAdd }) {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10 space-y-10">
-      {categories.map((cat) => (
-        <div key={cat.id} id={cat.id}>
-          <div className="flex items-end justify-between mb-4">
-            <h2 className="text-2xl font-bold">{cat.title}</h2>
-            <a href="#" className="text-sm text-amber-600 hover:underline">View all</a>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cat.items.map((item) => (
-              <article key={item.id} className="rounded-xl border border-slate-200 overflow-hidden bg-white shadow-sm">
-                <img src={item.img} alt={item.name} className="h-40 w-full object-cover" />
-                <div className="p-4">
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p className="text-sm text-slate-600">{item.desc}</p>
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="font-bold">${item.price.toFixed(2)}</span>
-                    <button onClick={() => onAdd(item)} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-black text-white text-sm hover:bg-slate-900">
-                      <Plus size={16} /> Add
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      ))}
+    <section className="mx-auto max-w-6xl px-4 py-8">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Popular near you</h2>
+        <a className="text-sm text-orange-600 hover:underline" href="#">See all</a>
+      </div>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {sampleMenu.map((item) => (
+          <article key={item.id} className="group overflow-hidden rounded-xl border border-zinc-200 bg-white">
+            <div className="relative">
+              <img src={item.img} alt={item.name} className="h-36 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+              <div className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium">
+                <Star className="h-3 w-3 fill-current text-green-600" />
+                {item.rating}
+              </div>
+            </div>
+            <div className="p-3">
+              <div className="line-clamp-1 font-medium">{item.name}</div>
+              <div className="mt-1 text-sm text-zinc-600">₹ {item.price}</div>
+              <button onClick={() => onAdd(item)} className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-200 px-3 py-2 text-sm hover:bg-zinc-50">
+                <Plus className="h-4 w-4" /> Add
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
